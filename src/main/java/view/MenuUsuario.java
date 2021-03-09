@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.ControladorUsuario;
@@ -14,6 +15,10 @@ public class MenuUsuario {
 	private static final int OPCAO_MENU_ATUALIZAR_USUARIO = 3;
 	private static final int OPCAO_MENU_EXCLUIR_USUARIO = 4;
 	private static final int OPCAO_MENU_USUARIO_VOLTAR = 5;
+	
+	private static final int OPCAO_MENU_CONSULTAR_TODOS_USUARIOS = 1;
+	private static final int OPCAO_MENU_CONSULTAR_UM_USUARIO = 2;
+	private static final int OPCAO_MENU_CONSULTAR_VOLTAR = 3;
 
 	public void apresentarMenuUsuario() {
 		int opcao = this.apresentarOpcoesUsuario();
@@ -25,7 +30,7 @@ public class MenuUsuario {
 				break;
 			}
 			case OPCAO_MENU_CONSULTAR_USUARIO: {
-				System.out.println("Usuário consultado!");
+				this.consultarUsuario();
 				break;
 			}
 			case OPCAO_MENU_ATUALIZAR_USUARIO: {
@@ -45,10 +50,47 @@ public class MenuUsuario {
 
 	}
 
+	private void consultarUsuario() {
+		int opcao = this.apresentarOpcoesConsulta();
+		ControladorUsuario controladorUsuario = new ControladorUsuario();
+		while (opcao != OPCAO_MENU_CONSULTAR_VOLTAR) {
+			switch (opcao) {
+			case OPCAO_MENU_CONSULTAR_TODOS_USUARIOS:
+				opcao = OPCAO_MENU_CONSULTAR_VOLTAR;
+				ArrayList<UsuarioVO> listaUsuariosVO = ControladorUsuario.consultarTodosUsuariosController();
+				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
+				for (int i = 0; i < listaUsuariosVO.size(); i++) {
+					System.out.println(listaUsuariosVO.get(i));
+				}
+				break;
+			case OPCAO_MENU_CONSULTAR_UM_USUARIO:
+				opcao = OPCAO_MENU_CONSULTAR_VOLTAR;
+				UsuarioVO usuarioVO = new UsuarioVO();
+				System.out.print("\nDigite o codigo do usuario: ");
+				usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+				UsuarioVO usuario = controladorUsuario.consultarUsuarioController(usuarioVO);
+				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
+				System.out.println(usuario);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	private int apresentarOpcoesConsulta() {
+		System.out.println("\nInforme o tipo de consulta a ser realizada: ");
+		System.out.println(OPCAO_MENU_CONSULTAR_TODOS_USUARIOS + " - Consultar todos Usuarios");
+		System.out.println(OPCAO_MENU_CONSULTAR_UM_USUARIO + " - Consultar um Usuario especifico");
+		System.out.println(OPCAO_MENU_CONSULTAR_VOLTAR + " - Voltar");
+		System.out.print("\nDigite a opção: ");
+		return Integer.parseInt(teclado.nextLine());
+	}
+
 	private void excluirUsuario() {
 		UsuarioVO usuarioVO = new UsuarioVO();	
 		
-		System.out.println("\nDigite o código do usuario: ");
+		System.out.print("\nDigite o código do usuario: ");
 		usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
 		
 		ControladorUsuario controladorUsuario = new ControladorUsuario();
@@ -59,17 +101,17 @@ public class MenuUsuario {
 	private void atualizarUsuario() {
 		UsuarioVO usuarioVO = new UsuarioVO();	
 		
-		System.out.println("\nDigite o código do usuario: ");
+		System.out.print("\nDigite o código do usuario: ");
 		usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
-		System.out.println("\nDigite o nome do usuario: ");
+		System.out.print("\nDigite o nome do usuario: ");
 		usuarioVO.setNome(teclado.nextLine());
-		System.out.println("\nDigite o cpf do usuario: ");
+		System.out.print("\nDigite o cpf do usuario: ");
 		usuarioVO.setCpf(teclado.nextLine());
-		System.out.println("\nDigite o telefone do usuario: ");
+		System.out.print("\nDigite o telefone do usuario: ");
 		usuarioVO.setTelefone(teclado.nextLine());
-		System.out.println("\nDigite o login do usuario: ");
+		System.out.print("\nDigite o login do usuario: ");
 		usuarioVO.setLogin(teclado.nextLine());
-		System.out.println("\nDigite a senha do usuario: ");
+		System.out.print("\nDigite a senha do usuario: ");
 		usuarioVO.setSenha(teclado.nextLine());
 		
 		ControladorUsuario controladorUsuario = new ControladorUsuario();
@@ -79,15 +121,15 @@ public class MenuUsuario {
 
 	private void cadastrarUsuario() {
 		UsuarioVO usuarioVO = new UsuarioVO();	
-		System.out.println("\nDigite o nome do usuario: ");
+		System.out.print("\nDigite o nome do usuario: ");
 		usuarioVO.setNome(teclado.nextLine());
-		System.out.println("\nDigite o cpf do usuario: ");
+		System.out.print("\nDigite o cpf do usuario: ");
 		usuarioVO.setCpf(teclado.nextLine());
-		System.out.println("\nDigite o telefone do usuario: ");
+		System.out.print("\nDigite o telefone do usuario: ");
 		usuarioVO.setTelefone(teclado.nextLine());
-		System.out.println("\nDigite o login do usuario: ");
+		System.out.print("\nDigite o login do usuario: ");
 		usuarioVO.setLogin(teclado.nextLine());
-		System.out.println("\nDigite a senha do usuario: ");
+		System.out.print("\nDigite a senha do usuario: ");
 		usuarioVO.setSenha(teclado.nextLine());
 		
 		ControladorUsuario controladorUsuario = new ControladorUsuario();
@@ -102,7 +144,7 @@ public class MenuUsuario {
 		System.out.println(OPCAO_MENU_ATUALIZAR_USUARIO + " - ATUALIZAR USUARIO");
 		System.out.println(OPCAO_MENU_EXCLUIR_USUARIO + " - EXCLUIR USUARIO");
 		System.out.println(OPCAO_MENU_USUARIO_VOLTAR + " - VOLTAR");
-		System.out.println("\nDigite a opção:");
+		System.out.print("\nDigite a opção:");
 		return Integer.parseInt(teclado.nextLine());
 	}
 

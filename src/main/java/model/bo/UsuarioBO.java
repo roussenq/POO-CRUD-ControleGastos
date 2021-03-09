@@ -1,5 +1,6 @@
 package model.bo;
 
+import java.util.ArrayList;
 import model.dao.UsuarioDAO;
 import model.vo.UsuarioVO;
 
@@ -48,9 +49,27 @@ public class UsuarioBO {
 				System.out.println("\nUsuario não excluido!");
 			}
 		} else {
-			System.out.println("\\nUsuario não excluido!\\nCódigo não encontrado\\nUsuário não encontrado na base de dados!");
+			System.out.println("\nUsuario não excluido!\nCódigo não encontrado\nUsuário não encontrado na base de dados!");
 
 		}
 		
+	}
+
+	public ArrayList<UsuarioVO> consultarTodosUsuariosBO() {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		ArrayList<UsuarioVO> listaUsuariosVO = usuarioDAO.consultarTodosUsuariosDAO();
+		if (listaUsuariosVO.isEmpty()) {
+			System.out.println("\nLista de usuarios vazia!");
+		} 
+		return listaUsuariosVO;
+	}
+
+	public UsuarioVO consultarUsuarioBO(UsuarioVO usuarioVO) {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		UsuarioVO usuario = usuarioDAO.consultarUsuariosDAO(usuarioVO);
+		if (usuario == null) {
+			System.out.print("\nUsuario não localizado!");
+		}
+		return usuario;
 	}
 }

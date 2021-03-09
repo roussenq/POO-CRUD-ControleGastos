@@ -40,7 +40,7 @@ public class Menu {
 		System.out.println(OPCAO_MENU_CADASTRO + " - Cadastros");
 		System.out.println(OPCAO_MENU_RELATORIO + " - Relatórios");
 		System.out.println(OPCAO_MENU_SAIR + " - Sair");
-		System.out.println("\nDigite a opção:");
+		System.out.print("\nDigite a opção:");
 
 		return Integer.parseInt(teclado.nextLine());
 	}

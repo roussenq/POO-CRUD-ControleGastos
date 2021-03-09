@@ -45,7 +45,7 @@ public class MenuCadastro {
 		System.out.println(OPCAO_MENU_CADASTRO_RECEITAS + " - Receitas");
 		System.out.println(OPCAO_MENU_CADASTRO_DESPESAS + " - Despesas");
 		System.out.println(OPCAO_MENU_CADASTRO_VOLTAR + " - Voltar");
-		System.out.println("\nDigite a opção:");
+		System.out.print("\nDigite a opção:");
 		return Integer.parseInt(teclado.nextLine());
 	}
 

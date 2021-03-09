@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.bo.UsuarioBO;
 import model.vo.UsuarioVO;
 
@@ -22,6 +24,20 @@ public class ControladorUsuario {
 		usuarioBO.excluirUsuarioBO(usuarioVO);
 		
 	}
+
+	public static ArrayList<UsuarioVO> consultarTodosUsuariosController() {
+		UsuarioBO usuarioBO = new UsuarioBO();
+		return usuarioBO.consultarTodosUsuariosBO();
+	}
+
+	public UsuarioVO consultarUsuarioController(UsuarioVO usuarioVO) {
+		UsuarioBO usuarioBO = new UsuarioBO();
+		return usuarioBO.consultarUsuarioBO(usuarioVO);
+	}
+
+
+	
+
 	
 	
 

@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.ArrayList;
+
 import model.vo.UsuarioVO;
 
 public class UsuarioDAO {
@@ -28,5 +30,17 @@ public class UsuarioDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public ArrayList<UsuarioVO> consultarTodosUsuariosDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public UsuarioVO consultarUsuariosDAO(UsuarioVO usuarioVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }
