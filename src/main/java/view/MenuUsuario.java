@@ -55,7 +55,7 @@ public class MenuUsuario {
 		ControladorUsuario controladorUsuario = new ControladorUsuario();
 		while (opcao != OPCAO_MENU_CONSULTAR_VOLTAR) {
 			switch (opcao) {
-			case OPCAO_MENU_CONSULTAR_TODOS_USUARIOS:
+			case OPCAO_MENU_CONSULTAR_TODOS_USUARIOS:{
 				opcao = OPCAO_MENU_CONSULTAR_VOLTAR;
 				ArrayList<UsuarioVO> listaUsuariosVO = ControladorUsuario.consultarTodosUsuariosController();
 				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
@@ -63,7 +63,8 @@ public class MenuUsuario {
 					System.out.println(listaUsuariosVO.get(i));
 				}
 				break;
-			case OPCAO_MENU_CONSULTAR_UM_USUARIO:
+			}
+			case OPCAO_MENU_CONSULTAR_UM_USUARIO:{
 				opcao = OPCAO_MENU_CONSULTAR_VOLTAR;
 				UsuarioVO usuarioVO = new UsuarioVO();
 				System.out.print("\nDigite o codigo do usuario: ");
@@ -72,8 +73,12 @@ public class MenuUsuario {
 				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
 				System.out.println(usuario);
 				break;
-			default:
-				break;
+			}
+			default:{
+				System.out.println("Opção invalida");
+				opcao = this.apresentarOpcoesConsulta();
+			}
+			
 			}
 		}
 	}

@@ -10,7 +10,7 @@ public class UsuarioBO {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 		if (usuarioDAO.existeRegistroPorCpf(usuarioVO.getCpf())) {
-			System.out.println("\nUsuario já cadastrado!");
+			System.out.println("\nCPF já cadastrado no BD!");
 		} else {
 			int resultado = usuarioDAO.cadastrarUsuarioDAO(usuarioVO);
 			if (resultado == 1) {
