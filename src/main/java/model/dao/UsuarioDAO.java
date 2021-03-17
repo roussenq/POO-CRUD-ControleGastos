@@ -82,8 +82,22 @@ public class UsuarioDAO {
 	}
 
 	public int atualizarUsuarioDAO(UsuarioVO usuarioVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		int resultado = 0;
+		
+		String query = "UPDATE usuario SET nome = '' WHERE idusuario = " + usuarioVO.getIdUsuario() ;
+		
+		try {
+			resultado = stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar a query de atualização do usuario");
+			System.out.println("ERRO: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return resultado;
 	}
 
 	public int excluirUsuarioDAO(UsuarioVO usuarioVO) {
