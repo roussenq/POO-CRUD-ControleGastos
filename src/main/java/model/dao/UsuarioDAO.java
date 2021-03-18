@@ -86,7 +86,12 @@ public class UsuarioDAO {
 		Statement stmt = Banco.getStatement(conn);
 		int resultado = 0;
 		
-		String query = "UPDATE usuario SET nome = '' WHERE idusuario = " + usuarioVO.getIdUsuario() ;
+		String query = "UPDATE usuario SET nome = '" + usuarioVO.getNome()
+					   + "', cpf = '" + usuarioVO.getCpf()
+					   + "', telefone = '" + usuarioVO.getTelefone()
+					   + "', login = '" + usuarioVO.getLogin()
+					   + "', senha = '"+usuarioVO.getSenha()
+					   + "' WHERE idusuario = " + usuarioVO.getIdUsuario() ;
 		
 		try {
 			resultado = stmt.executeUpdate(query);
@@ -101,8 +106,22 @@ public class UsuarioDAO {
 	}
 
 	public int excluirUsuarioDAO(UsuarioVO usuarioVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		int resultado = 0;
+		
+		String query = "DELETE FROM usuario WHERE idusuario = " + usuarioVO.getIdUsuario();
+		
+		try {
+			resultado = stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar query de exclusão do usuario");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return resultado;
 	}
 
 	public ArrayList<UsuarioVO> consultarTodosUsuariosDAO() {
