@@ -125,15 +125,62 @@ public class UsuarioDAO {
 	}
 
 	public ArrayList<UsuarioVO> consultarTodosUsuariosDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		ArrayList<UsuarioVO> listaUsuariosVO = new ArrayList<UsuarioVO>();
+		
+		String query = "SELECT idusuario, nome, cpf, telefone, login, senha FROM usuario";
+		
+		try {
+			resultado = stmt.executeQuery(query);
+			while (resultado.next()) {
+				UsuarioVO usuario = new UsuarioVO();
+				usuario.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuario.setNome(resultado.getString(2));
+				usuario.setCpf(resultado.getString(3));
+				usuario.setTelefone(resultado.getString(4));
+				usuario.setLogin(resultado.getString(5));
+				usuario.setSenha(resultado.getString(6));
+				listaUsuariosVO.add(usuario);
+			}
+		} catch (SQLException e) {
+			System.out.println("\nErro ao executar a query de consulta de todos usuarios!");
+			System.out.println("\nErro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return listaUsuariosVO;
 	}
 
 	public UsuarioVO consultarUsuariosDAO(UsuarioVO usuarioVO) {
-		// TODO Auto-generated method stub
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		UsuarioVO usuario = null;
+		
+		String query = "SELECT nome, cpf, telefone, login, senha FROM usuario WHERE idusuario = " + usuarioVO.getIdUsuario();
+		try {
+			resultado = stmt.executeQuery(query);
+			while (resultado.next()) {
+				usuario = new UsuarioVO();
+				usuario.setIdUsuario(Integer.parseInt(resultado.getString(1)));
+				usuario.setNome(resultado.getString(2));
+				usuario.setCpf(resultado.getString(3));
+				usuario.setTelefone(resultado.getString(4));
+				usuario.setLogin(resultado.getString(5));
+				usuario.setSenha(resultado.getString(6));
+			}
+		} catch (SQLException e) {
+			System.out.println("\nErro ao executar a query de consulta de um usuario!");
+			System.out.println("\nErro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
 		return null;
 	}
-
-	
-
 }

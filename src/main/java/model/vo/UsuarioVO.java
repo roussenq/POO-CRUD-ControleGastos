@@ -60,5 +60,13 @@ public class UsuarioVO {
 		this.senha = senha;
 	}
 
+	public void imprimir() {
+		System.out.printf("\n%3d  %-40s  %-15s  %-15s \n",
+				this.getIdUsuario(),
+				this.getNome(),
+				this.getCpf(),
+				this.getTelefone());
+	}
+
 	
 }

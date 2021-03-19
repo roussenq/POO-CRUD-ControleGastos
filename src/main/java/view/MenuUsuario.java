@@ -59,8 +59,10 @@ public class MenuUsuario {
 				opcao = OPCAO_MENU_CONSULTAR_VOLTAR;
 				ArrayList<UsuarioVO> listaUsuariosVO = ControladorUsuario.consultarTodosUsuariosController();
 				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
+				System.out.printf("\n%3s  %-40s  %-15s  %-15s \n", "ID", "NOME", "CPF", "TELEFONE");
+				
 				for (int i = 0; i < listaUsuariosVO.size(); i++) {
-					System.out.println(listaUsuariosVO.get(i));
+					listaUsuariosVO.get(i).imprimir();	
 				}
 				break;
 			}
@@ -71,7 +73,8 @@ public class MenuUsuario {
 				usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
 				UsuarioVO usuario = controladorUsuario.consultarUsuarioController(usuarioVO);
 				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
-				System.out.println(usuario);
+				System.out.printf("\n%3s  %-40s  %-15s  %-15s \n", "ID", "NOME", "CPF", "TELEFONE");
+				usuario.imprimir();
 				break;
 			}
 			default:{
