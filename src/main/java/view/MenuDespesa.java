@@ -1,10 +1,12 @@
 package view;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class MenuDespesa {
 
 	Scanner teclado = new Scanner(System.in);
+	DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	private static final int OPCAO_MENU_CADASTRAR_DESPESA = 1;
 	private static final int OPCAO_MENU_CONSULTAR_DESPESA = 2;

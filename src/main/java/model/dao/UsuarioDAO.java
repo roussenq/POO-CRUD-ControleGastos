@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -161,7 +160,7 @@ public class UsuarioDAO {
 		ResultSet resultado = null;
 		UsuarioVO usuario = null;
 		
-		String query = "SELECT nome, cpf, telefone, login, senha FROM usuario WHERE idusuario = " + usuarioVO.getIdUsuario();
+		String query = "SELECT idusuario, nome, cpf, telefone, login, senha FROM usuario WHERE idusuario = " + usuarioVO.getIdUsuario();
 		try {
 			resultado = stmt.executeQuery(query);
 			while (resultado.next()) {
@@ -181,6 +180,6 @@ public class UsuarioDAO {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);
 		}
-		return null;
+		return usuario;
 	}
 }
