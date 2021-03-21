@@ -50,18 +50,19 @@ public class MenuDespesa {
 
 	private void cadastrarDespesa() {
 		DespesaVO despesaVO = new DespesaVO();
-		//int idUsuario, String descricao, double valor, LocalDate dataVencimento,
-		//LocalDate dataPagamento, String categoria
 		System.out.println("\nInforme o codigo do usuario: ");
 		despesaVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
 		System.out.println("\nInforme a descrição da despesa: ");
 		despesaVO.setDescricao(teclado.nextLine());
 		System.out.println("\nInforme o valor da despesa: ");
 		despesaVO.setValor(Double.parseDouble(teclado.nextLine()));
-		System.out.println("\nInforme a data de vencimento: ");
+		System.out.println("\nInforme a data de vencimento da despesa: ");
 		despesaVO.setDataVencimento(LocalDate.parse(teclado.nextLine(), dataFormatter));
-		System.out.println("\nInforme a data de pagamento: ");
-		despesaVO.setDataPagamento(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		System.out.println("\nInforme a data de pagamento da despesa: ");
+		String dataPagamento = teclado.nextLine();
+		if(!dataPagamento.equalsIgnoreCase("")) {
+			despesaVO.setDataPagamento(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		}
 		System.out.println("\nInforme a categoria da despesa: ");
 		despesaVO.setCategoria(teclado.nextLine());
 		

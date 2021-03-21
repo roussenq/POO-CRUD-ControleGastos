@@ -43,14 +43,15 @@ public class DespesaDAO {
 		 			+ despesaVO.getIdUsuario() + ",'" 
 		 			+ despesaVO.getDescricao() + "',"
 		 			+ despesaVO.getValor() + ",'"
-		 			+ despesaVO.getDataVencimento();
+		 			+ despesaVO.getDataVencimento() + "',";
  		
  		if (despesaVO.getDataPagamento() != null) {
- 			query = query + "','" + despesaVO.getDataPagamento() +  "'"; 			
+ 			query = query + " '" + despesaVO.getDataPagamento() +  "',"; 			
  		}else {
- 			query = query + "'," + null;
+ 			query = query + " " + null + ",";
  		} 
- 		query = query +  ",'" + despesaVO.getCategoria() + "')";
+ 		
+ 		query = query +  " '" + despesaVO.getCategoria() + "') ";
 			
  		try {
 			resultado = stmt.executeUpdate(query);
