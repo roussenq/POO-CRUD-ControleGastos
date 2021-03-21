@@ -50,9 +50,7 @@ public class UsuarioBO {
 			}
 		} else {
 			System.out.println("\nUsuario não excluido!\nCódigo não encontrado\nUsuário não encontrado na base de dados!");
-
 		}
-		
 	}
 
 	public ArrayList<UsuarioVO> consultarTodosUsuariosBO() {
@@ -73,3 +71,37 @@ public class UsuarioBO {
 		return usuario;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

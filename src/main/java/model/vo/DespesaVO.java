@@ -8,7 +8,7 @@ public class DespesaVO extends LancamentoVO {
 	private LocalDate dataPagamento;
 	private String categoria;
 	
-	public DespesaVO(int id, int idUsuario, String descricao, String valor, LocalDate dataVencimento,
+	public DespesaVO(int id, int idUsuario, String descricao, double valor, LocalDate dataVencimento,
 			LocalDate dataPagamento, String categoria) {
 		super(id, idUsuario, descricao, valor);
 		this.dataVencimento = dataVencimento;

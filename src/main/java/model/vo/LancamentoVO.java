@@ -5,9 +5,9 @@ public abstract class LancamentoVO {
 	private int id;
 	private int idUsuario;
 	private String descricao;
-	private String valor;
+	private double valor;
 	
-	public LancamentoVO(int id, int idUsuario, String descricao, String valor) {
+	public LancamentoVO(int id, int idUsuario, String descricao, double valor) {
 		super();
 		this.id = id;
 		this.idUsuario = idUsuario;
@@ -43,11 +43,11 @@ public abstract class LancamentoVO {
 		this.descricao = descricao;
 	}
 
-	public String getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	
