@@ -9,7 +9,6 @@ public class ReceitaBO {
 
 	public void cadastrarReceitaBO(ReceitaVO receitaVO) {
 		ReceitaDAO receitaDAO = new ReceitaDAO();
-		
 		if(receitaDAO.existeRegistroPorIdUsuario(receitaVO.getIdUsuario())) {
 			int resultado = receitaDAO.cadastrarReceitaDAO(receitaVO);
 			if(resultado == 1) {

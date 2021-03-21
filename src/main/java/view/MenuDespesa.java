@@ -1,7 +1,11 @@
 package view;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import controller.ControladoraDespesa;
+import model.vo.DespesaVO;
 
 public class MenuDespesa {
 
@@ -20,7 +24,7 @@ public class MenuDespesa {
 		while (opcao != OPCAO_MENU_DESPESA_VOLTAR) {
 			switch (opcao) {
 			case OPCAO_MENU_CADASTRAR_DESPESA: {
-				System.out.println("Despesa cadastrada!");
+				this.cadastrarDespesa();
 				break;
 			}
 			case OPCAO_MENU_CONSULTAR_DESPESA: {
@@ -42,6 +46,28 @@ public class MenuDespesa {
 			opcao = this.apresentarOpcoesDespesa();
 		}
 
+	}
+
+	private void cadastrarDespesa() {
+		DespesaVO despesaVO = new DespesaVO();
+		//int idUsuario, String descricao, double valor, LocalDate dataVencimento,
+		//LocalDate dataPagamento, String categoria
+		System.out.println("\nInforme o codigo do usuario: ");
+		despesaVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+		System.out.println("\nInforme a descrição da despesa: ");
+		despesaVO.setDescricao(teclado.nextLine());
+		System.out.println("\nInforme o valor da despesa: ");
+		despesaVO.setValor(Double.parseDouble(teclado.nextLine()));
+		System.out.println("\nInforme a data de vencimento: ");
+		despesaVO.setDataVencimento(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		System.out.println("\nInforme a data de pagamento: ");
+		despesaVO.setDataPagamento(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		System.out.println("\nInforme a categoria da despesa: ");
+		despesaVO.setCategoria(teclado.nextLine());
+		
+		ControladoraDespesa controladoraDespesa = new ControladoraDespesa();
+		controladoraDespesa.cadastrarDespesaController(despesaVO);
+		
 	}
 
 	private int apresentarOpcoesDespesa() {
