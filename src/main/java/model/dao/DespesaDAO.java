@@ -65,4 +65,103 @@ public class DespesaDAO {
  		return resultado;
 	}
 
+	public boolean existeRegistroPorIdDespesa(int id) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		
+		String query = "SELECT iddespesa FROM despesa WHERE iddespesa =" + id;
+		
+		try {
+			resultado = stmt.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("\nErro ao executar a query que verifica se existe iddespesa");
+			System.out.println("\nErro " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return false;
+	}
+
+	public int atualizarDespesaVO(DespesaVO despesaVO) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		int resultado = 0;
+		
+		String query = "UPDATE despesa SET "
+				+ " descricao ='" + despesaVO.getDescricao() + "',"
+				+ " valor=" + despesaVO.getValor() + ","
+				+ " datavencimento='"+ despesaVO.getDataVencimento() + "',"
+				+ " datapagamento=" + despesaVO.getDataPagamento() + ","
+				+ " categoria='" + despesaVO.getCategoria() + "'"
+				+ "WHERE idusuario =" + despesaVO.getIdUsuario() + "  and iddespesa = " + despesaVO.getId();
+		
+		try {
+			resultado = stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			System.out.println("\nErro ao executar a query de atualização da despesa!");
+			System.out.println("\nErro: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return resultado;
+	}
+
+	public int excluirDespesa(DespesaVO despesaVO) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		int resultado = 0;
+		
+		String query = "DELETE FROM despesa WHERE idusuario = " + despesaVO.getIdUsuario() + " AND iddespesa = " + despesaVO.getId();
+		
+		try {
+			resultado = stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			System.out.println("\nErro ao executar a query de exclusão da despesa!");
+			System.out.println("\nErro: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return resultado;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

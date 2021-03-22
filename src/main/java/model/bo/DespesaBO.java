@@ -19,4 +19,39 @@ public class DespesaBO {
 		}
 	}
 
+	public void atualizarDespesaBO(DespesaVO despesaVO) {
+		DespesaDAO despesaDAO = new DespesaDAO();
+		
+		if(despesaDAO.existeRegistroPorIdUsuario(despesaVO.getIdUsuario()) 
+				&& despesaDAO.existeRegistroPorIdDespesa(despesaVO.getId()) ) {
+				
+				int resultado = despesaDAO.atualizarDespesaVO(despesaVO);
+				if(resultado == 1) {
+					System.out.println("\nDespesa atualizada com sucesso!");
+				} else {
+					System.out.println("\nDespesa não atualizada");
+				}
+			
+		} else {
+			System.out.println("\nDespesa não localizada no BD");
+		}
+		
+	}
+
+	public void excluirDespesaBO(DespesaVO despesaVO) {
+		DespesaDAO despesaDAO = new DespesaDAO();
+		
+		if(despesaDAO.existeRegistroPorIdUsuario(despesaVO.getIdUsuario()) 
+				&&	despesaDAO.existeRegistroPorIdDespesa(despesaVO.getId())) {
+			
+			int resultado = despesaDAO.excluirDespesa(despesaVO);
+			if(resultado == 1) {
+				System.out.println("\nExclusão realizada com sucesso!");
+			} else {
+				System.out.println("\nExclusão não realizada");
+			}
+		}
+	}
+
+
 }

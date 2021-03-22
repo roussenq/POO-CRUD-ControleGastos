@@ -20,7 +20,6 @@ public class MenuDespesa {
 
 	public void apresentarMenuDespesa() {
 		int opcao = this.apresentarOpcoesDespesa();
-
 		while (opcao != OPCAO_MENU_DESPESA_VOLTAR) {
 			switch (opcao) {
 			case OPCAO_MENU_CADASTRAR_DESPESA: {
@@ -32,11 +31,11 @@ public class MenuDespesa {
 				break;
 			}
 			case OPCAO_MENU_ATUALIZAR_DESPESA: {
-				System.out.println("Despesa atualizada!");
+				this.atualizarDespesa();
 				break;
 			}
 			case OPCAO_MENU_EXCLUIR_DESPESA: {
-				System.out.println("Despesa excluida!");
+				this.excluirDespesa();
 				break;
 			}
 			default:
@@ -45,7 +44,43 @@ public class MenuDespesa {
 			}
 			opcao = this.apresentarOpcoesDespesa();
 		}
+	}
 
+	private void excluirDespesa() {
+		DespesaVO despesaVO = new DespesaVO();
+		
+		System.out.println("\nInforme o código do usuario: ");
+		despesaVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+		System.out.println("\nInforme o codigo da despesa que deseja excluir: ");
+		despesaVO.setId(Integer.parseInt(teclado.nextLine()));
+
+		ControladoraDespesa controladoraDespesa = new ControladoraDespesa();
+		controladoraDespesa.excluirDespesaController(despesaVO);
+	}
+
+	private void atualizarDespesa() {
+		DespesaVO despesaVO = new DespesaVO();
+		
+		System.out.println("\nInforme o código do usuario: ");
+		despesaVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
+		System.out.println("\nInforme o código da despesa: ");
+		despesaVO.setId(Integer.parseInt(teclado.nextLine()));
+		System.out.println("\nInforme a nova descrição da despesa: ");
+		despesaVO.setDescricao(teclado.nextLine());
+		System.out.println("\nInforme o novo valor da despesa: ");
+		despesaVO.setValor(Double.parseDouble(teclado.nextLine()));
+		System.out.println("\nInforme a nova data de vencimento: ");
+		despesaVO.setDataVencimento(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		System.out.println("\nInforme a nova data de pagamento: ");
+		String dataPagamento = teclado.nextLine();
+		if(!dataPagamento.equalsIgnoreCase("")) {
+			despesaVO.setDataPagamento(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		}
+		System.out.println("\nInforme a nova categoria: ");
+		despesaVO.setCategoria(teclado.nextLine());
+		
+		ControladoraDespesa controladoraDespesa = new ControladoraDespesa();
+		controladoraDespesa.atualizarDespesaController(despesaVO);
 	}
 
 	private void cadastrarDespesa() {
@@ -68,7 +103,6 @@ public class MenuDespesa {
 		
 		ControladoraDespesa controladoraDespesa = new ControladoraDespesa();
 		controladoraDespesa.cadastrarDespesaController(despesaVO);
-		
 	}
 
 	private int apresentarOpcoesDespesa() {
