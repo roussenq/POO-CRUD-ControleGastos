@@ -97,7 +97,7 @@ public class MenuReceita {
 	}
 	
 	private void consultarReceita() {
-		int opcao = this.apresentarOpcoesConsulta();
+		int opcao = this.apresentarOpcoesConsultaReceita();
 		ControladoraReceita controladoraReceita = new ControladoraReceita();
 		while(opcao != OPCAO_MENU_CONSULTAR_RECEITA_VOLTAR) {
 			switch (opcao) {
@@ -127,17 +127,9 @@ public class MenuReceita {
 			}
 			default:
 				System.out.println("Opção invalida");
-				opcao = this.apresentarOpcoesConsulta();
+				opcao = this.apresentarOpcoesConsultaReceita();
 			}
 		}
-	
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	private int apresentarOpcoesReceita() {
@@ -152,7 +144,7 @@ public class MenuReceita {
 		return Integer.parseInt(teclado.nextLine());
 	}
 	
-	private int apresentarOpcoesConsulta() {
+	private int apresentarOpcoesConsultaReceita() {
 		System.out.println("\nInforme o tipo de consulta a ser realizada: ");
 		System.out.println(OPCAO_MENU_CONSULTAR_TODAS_RECEITAS + " - Consultar todas receitas");
 		System.out.println(OPCAO_MENU_CONSULTAR_UMA_RECEITA + " - Consultar uma receita especifica");

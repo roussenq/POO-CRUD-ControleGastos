@@ -5,14 +5,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DespesaVO extends LancamentoVO {
-	
-	DecimalFormat df = new DecimalFormat("0.00");
-	DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+	DecimalFormat df = new DecimalFormat("0.00");
+	DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
 	private LocalDate dataVencimento;
 	private LocalDate dataPagamento;
 	private String categoria;
-	
+
 	public DespesaVO(int id, int idUsuario, String descricao, double valor, LocalDate dataVencimento,
 			LocalDate dataPagamento, String categoria) {
 		super(id, idUsuario, descricao, valor);
@@ -48,8 +48,24 @@ public class DespesaVO extends LancamentoVO {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	
-	
-	
+
+	public void imprimir() {
+		System.out.printf("\n%3d %-10d %-30s %-10s %-15s %-15s %-15s\n", 
+				this.getId(),
+				this.getIdUsuario(),
+				this.getDescricao(),
+				df.format(this.getValor()),
+				this.getDataVencimento().format(dataFormatter),
+				validadata(this.getDataPagamento()),
+				this.getCategoria());
+	}
+
+	private Object validadata(LocalDate dataPagamento) {
+		String resultado = "";
+		if(dataPagamento != null) {
+			resultado = dataPagamento.format(dataFormatter).toString();
+		}
+		return resultado;
+	}
 
 }

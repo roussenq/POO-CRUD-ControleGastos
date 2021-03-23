@@ -1,5 +1,7 @@
 package model.bo;
 
+import java.util.ArrayList;
+
 import model.dao.DespesaDAO;
 import model.vo.DespesaVO;
 
@@ -51,6 +53,24 @@ public class DespesaBO {
 				System.out.println("\nExclusão não realizada");
 			}
 		}
+	}
+
+	public ArrayList<DespesaVO> consultarTodasDespesasBO(DespesaVO despesaVO) {
+		DespesaDAO despesaDAO = new DespesaDAO();
+		ArrayList<DespesaVO> listaDespesasVO = despesaDAO.consultarTodasDespesasDAO(despesaVO);
+		if(listaDespesasVO.isEmpty()) {
+			System.out.println("\nLista de despesas está vazia!");
+		}
+		return listaDespesasVO;
+	}
+
+	public DespesaVO consultarDespesaBO(DespesaVO despesaVO) {
+		DespesaDAO despesaDAO = new DespesaDAO();
+		DespesaVO despesa = despesaDAO.consultarDespesaDAO(despesaVO);
+		if(despesa == null) {
+			System.out.println("\nDespesa não localizada!");
+		}
+		return despesa;
 	}
 
 
