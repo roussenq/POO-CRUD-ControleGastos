@@ -45,9 +45,12 @@ public class DespesaDAO {
  		String query = "INSERT INTO despesa(idusuario, descricao, valor, datavencimento, datapagamento, categoria) VALUES(" 
 		 			+ despesaVO.getIdUsuario() + ",'" 
 		 			+ despesaVO.getDescricao() + "',"
-		 			+ despesaVO.getValor() + ",'"
-		 			+ despesaVO.getDataVencimento() + "',";
- 		
+		 			+ despesaVO.getValor() + ",";
+		if (despesaVO.getDataVencimento() != null) {
+			query = query + " '" + despesaVO.getDataVencimento() +  "',";  					 			
+		}else {
+ 			query = query + " " + null + ",";
+ 		}
  		if (despesaVO.getDataPagamento() != null) {
  			query = query + " '" + despesaVO.getDataPagamento() +  "',"; 			
  		}else {
@@ -162,7 +165,9 @@ public class DespesaDAO {
 				despesa.setIdUsuario(Integer.parseInt(resultado.getString(2)));
 				despesa.setDescricao(resultado.getString(3));
 				despesa.setValor(Double.parseDouble(resultado.getString(4)));
-				despesa.setDataVencimento(LocalDate.parse(resultado.getString(5), dataFormatter));
+				if(resultado.getString(5) != null) {
+					despesa.setDataVencimento(LocalDate.parse(resultado.getString(5), dataFormatter));
+				}
 				if(resultado.getString(6) != null) {
 					despesa.setDataPagamento(LocalDate.parse(resultado.getString(6), dataFormatter));	
 				}
@@ -187,7 +192,7 @@ public class DespesaDAO {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		DespesaVO despesa = new DespesaVO();
+		DespesaVO despesa = null;
 		
 		String query = "SELECT "
 				+ "iddespesa,"
@@ -203,11 +208,14 @@ public class DespesaDAO {
 		try {
 			resultado = stmt.executeQuery(query);
 			if(resultado.next()) {
+				despesa = new DespesaVO();
 				despesa.setId(Integer.parseInt(resultado.getString(1)));
 				despesa.setIdUsuario(Integer.parseInt(resultado.getString(2)));
 				despesa.setDescricao(resultado.getString(3));
 				despesa.setValor(Double.parseDouble(resultado.getString(4)));
-				despesa.setDataVencimento(LocalDate.parse(resultado.getString(5), dataFormatter));
+			//	if(resultado.getString(5) != null) {
+					despesa.setDataVencimento(LocalDate.parse(resultado.getString(5), dataFormatter));
+	//			}
 				if(resultado.getString(6) != null) {
 					despesa.setDataPagamento(LocalDate.parse(resultado.getString(6), dataFormatter));	
 				}

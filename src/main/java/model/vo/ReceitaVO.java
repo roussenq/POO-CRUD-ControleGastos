@@ -33,9 +33,18 @@ public class ReceitaVO extends LancamentoVO{
 				this.getId(),
 				this.getDescricao(),
 				this.df.format(getValor()),
-				this.getDataReceita());
+				validaDataReceita(this.getDataReceita()));
 	}
 
+	private Object validaDataReceita(LocalDate dataReceita) {
+		String resultado = "";
+		if(dataReceita != null) {
+			resultado = dataReceita.format(dataFormatter).toString();
+		}
+		return resultado;
+	}
+
+	
 	
 	
 	

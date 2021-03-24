@@ -52,6 +52,8 @@ public class DespesaBO {
 			} else {
 				System.out.println("\nExclusão não realizada");
 			}
+		}else {
+			System.out.println("\nDespesa não localizada no BD");
 		}
 	}
 

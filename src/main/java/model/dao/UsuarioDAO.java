@@ -114,8 +114,16 @@ public class UsuarioDAO {
 		try {
 			resultado = stmt.executeUpdate(query);
 		} catch (SQLException e) {
+			String erro = null;
 			System.out.println("Erro ao executar query de exclusão do usuario");
-			System.out.println("Erro: " + e.getMessage());
+			System.out.println(e.getMessage());
+			erro = ""+e.getMessage();
+			if(erro.equalsIgnoreCase("Cannot delete or update a parent row: a foreign key constraint fails (`dbcontrolegastos`.`despesa`, CONSTRAINT `despesa_ibfk_1` FOREIGN KEY (`IDUSUARIO`) REFERENCES `usuario` (`IDUSUARIO`))")) {
+				System.out.println("Existe despesa cadastrada para este usuario!");
+			}
+			if(erro.equalsIgnoreCase("Cannot delete or update a parent row: a foreign key constraint fails (`dbcontrolegastos`.`receita`, CONSTRAINT `receita_ibfk_1` FOREIGN KEY (`IDUSUARIO`) REFERENCES `usuario` (`IDUSUARIO`))")) {
+				System.out.println("Existe receita cadastrada para este usuario!");
+			}
 		} finally {
 			Banco.closeStatement(stmt);
 			Banco.closeConnection(conn);

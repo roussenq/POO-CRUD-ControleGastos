@@ -55,17 +55,24 @@ public class DespesaVO extends LancamentoVO {
 				this.getIdUsuario(),
 				this.getDescricao(),
 				df.format(this.getValor()),
-				this.getDataVencimento().format(dataFormatter),
-				validadata(this.getDataPagamento()),
+				validaDataVencimento(this.getDataVencimento()),
+				validaDataPagamento(this.getDataPagamento()),
 				this.getCategoria());
 	}
 
-	private Object validadata(LocalDate dataPagamento) {
+	private Object validaDataPagamento(LocalDate dataPagamento) {
 		String resultado = "";
 		if(dataPagamento != null) {
 			resultado = dataPagamento.format(dataFormatter).toString();
 		}
 		return resultado;
 	}
-
+	
+	private Object validaDataVencimento(LocalDate dataVencimento) {
+		String resultado = "";
+		if(dataVencimento != null) {
+			resultado = dataVencimento.format(dataFormatter).toString();
+		}
+		return resultado;
+	}
 }

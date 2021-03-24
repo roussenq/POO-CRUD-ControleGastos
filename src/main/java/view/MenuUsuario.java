@@ -119,9 +119,11 @@ public class MenuUsuario {
 				System.out.print("\nDigite o codigo do usuario: ");
 				usuarioVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
 				UsuarioVO usuario = controladorUsuario.consultarUsuarioController(usuarioVO);
-				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
-				System.out.printf("\n%3s  %-40s  %-15s  %-15s \n", "ID", "NOME", "CPF", "TELEFONE");
-				usuario.imprimir();
+				if(usuario != null ) {
+					System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
+					System.out.printf("\n%3s  %-40s  %-15s  %-15s \n", "ID", "NOME", "CPF", "TELEFONE");
+					usuario.imprimir();
+				}
 				break;
 			}
 			default:{
@@ -138,7 +140,7 @@ public class MenuUsuario {
 	
 
 	private int apresentarOpcoesUsuario() {
-		System.out.println("-----====Usuários====-----");
+		System.out.println("\n-----====Usuários====-----");
 		System.out.println("\nOpções:");
 		System.out.println(OPCAO_MENU_CADASTRAR_USUARIO + " - CADASTRAR USUARIO");
 		System.out.println(OPCAO_MENU_CONSULTAR_USUARIO + " - CONSULTAR USUARIO");

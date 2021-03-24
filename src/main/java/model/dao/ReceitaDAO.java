@@ -44,9 +44,13 @@ public class ReceitaDAO {
 		String query = "insert into receita (idusuario, descricao, valor, datareceita) values ("
 				+ receitaVO.getIdUsuario() + ",'"
 				+ receitaVO.getDescricao() + "',"
-				+ receitaVO.getValor() + ",'"
-				+ receitaVO.getDataReceita() + "')";
-		
+				+ receitaVO.getValor() + ",";
+				
+				if (receitaVO.getDataReceita() != null) {
+					query = query + "'" + receitaVO.getDataReceita() +  "')"; 			
+				}else {
+					query = query + " " + null + ")";
+				} 
 		try {
 			resultado = stmt.executeUpdate(query);
 		} catch (SQLException e) {
@@ -109,9 +113,16 @@ public class ReceitaDAO {
 		
 		String query = "update receita set "
 				+ "descricao = '" + receitaVO.getDescricao() + "', "
-				+ "valor = " + receitaVO.getValor() + ", "
-				+ "datareceita = '" + receitaVO.getDataReceita() + "' "
-				+ "where idusuario = " + receitaVO.getIdUsuario() + " and idreceita =" + receitaVO.getId();
+				+ "valor = " + receitaVO.getValor() + ",";
+				
+				if (receitaVO.getDataReceita() != null) {
+					query = query + "datareceita = '" + receitaVO.getDataReceita() + "' "
+							+ "where idusuario = " + receitaVO.getIdUsuario() + " and idreceita =" + receitaVO.getId();		
+				}else {
+					query = query + " " + null + " where idusuario = " + receitaVO.getIdUsuario() + " and idreceita =" + receitaVO.getId();
+				} 
+				
+				
 		
 		try {
 			resultado = stmt.executeUpdate(query);
@@ -143,7 +154,9 @@ public class ReceitaDAO {
 				receita.setId(Integer.parseInt(resultado.getString(1)));
 				receita.setDescricao(resultado.getString(2));
 				receita.setValor(Double.parseDouble(resultado.getString(3)));
+				if(resultado.getString(4) != null) {
 				receita.setDataReceita(LocalDate.parse(resultado.getString(4), dataFormatter));
+				}
 			}
 		} catch (SQLException e) {
 			System.out.println("\nErro ao executar a query de consulta a uma receita!");
@@ -171,7 +184,9 @@ public class ReceitaDAO {
 				receita.setId(Integer.parseInt(resultado.getString(1)));
 				receita.setDescricao(resultado.getString(2));
 			    receita.setValor(Double.parseDouble(resultado.getString(3)));
+				if(resultado.getString(4) != null) {
 				receita.setDataReceita(LocalDate.parse(resultado.getString(4), dataFormatter));
+				}
 				listaReceitasVO.add(receita);
 			}
 		} catch (SQLException e) {

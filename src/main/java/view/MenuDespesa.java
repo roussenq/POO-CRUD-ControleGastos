@@ -75,12 +75,13 @@ public class MenuDespesa {
 				DespesaVO despesaVO = new DespesaVO();
 				System.out.println("\nInforme o código da despesa: ");
 				despesaVO.setId(Integer.parseInt(teclado.nextLine()));
-				
 				DespesaVO despesa = controladoraDespesa.consultarDespesaController(despesaVO);
-				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
-				System.out.printf("\n%3s %-5s %-30s %-10s %-15s %-15s %-15s\n",
-						"ID", "IDUSUARIO", "DESCRIÇÃO", "VALOR","DATA VENCIMENTO", "DATA PAGAMENTO", "CATEGORIA");
-				despesa.imprimir();
+				if(despesa != null) {
+					System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
+					System.out.printf("\n%3s %-5s %-30s %-10s %-15s %-15s %-15s\n",
+							"ID", "IDUSUARIO", "DESCRIÇÃO", "VALOR","DATA VENCIMENTO", "DATA PAGAMENTO", "CATEGORIA");
+					despesa.imprimir();
+				}
 				break;
 			}
 			default: {
@@ -95,8 +96,8 @@ public class MenuDespesa {
 
 	private int apresentarOpcoesConsultaDespesa() {
 		System.out.println("\nInforme o tipo de consulta a ser realizada: ");
-		System.out.println(OPCAO_MENU_CONSULTAR_TODAS_DESPESAS + " - Consultar todas receitas");
-		System.out.println(OPCAO_MENU_CONSULTAR_UMA_DESPESA + " - Consultar uma receita especifica");
+		System.out.println(OPCAO_MENU_CONSULTAR_TODAS_DESPESAS + " - Consultar todas despesas");
+		System.out.println(OPCAO_MENU_CONSULTAR_UMA_DESPESA + " - Consultar uma despesa especifica");
 		System.out.println(OPCAO_MENU_CONSULTAR_DESPESA_VOLTAR + " - Voltar");
 		System.out.print("\nDigite a opção: ");
 		return Integer.parseInt(teclado.nextLine());
@@ -148,7 +149,10 @@ public class MenuDespesa {
 		System.out.println("\nInforme o valor da despesa: ");
 		despesaVO.setValor(Double.parseDouble(teclado.nextLine()));
 		System.out.println("\nInforme a data de vencimento da despesa: ");
-		despesaVO.setDataVencimento(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		String dataVencimento = teclado.nextLine();
+		if (!dataVencimento .equalsIgnoreCase("")) {
+			despesaVO.setDataVencimento(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		}
 		System.out.println("\nInforme a data de pagamento da despesa: ");
 		String dataPagamento = teclado.nextLine();
 		if (!dataPagamento.equalsIgnoreCase("")) {

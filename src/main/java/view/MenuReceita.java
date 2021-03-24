@@ -53,7 +53,6 @@ public class MenuReceita {
 	
 	private void cadastrarReceita() {
 		ReceitaVO receitaVO = new ReceitaVO();
-		//ReceitaVO => int id, int idUsuario, String descricao, double valor, LocalDate dataReceita
 		System.out.println("\nInforme o codigo do usuario: ");
 		receitaVO.setIdUsuario(Integer.parseInt(teclado.nextLine()));
 		System.out.println("\nInforme a descrição da receita: ");
@@ -61,7 +60,11 @@ public class MenuReceita {
 		System.out.println("\nInforme o valor da receita: ");
 		receitaVO.setValor(Double.parseDouble(teclado.nextLine()));
 		System.out.println("\nInforme a data da receita: ");
-		receitaVO.setDataReceita(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		String dataReceita = teclado.nextLine();
+		if (!dataReceita.equalsIgnoreCase("")) {
+			receitaVO.setDataReceita(LocalDate.parse(dataReceita, dataFormatter));
+		}
+		
 		
 		ControladoraReceita controladoraReceita = new ControladoraReceita();
 		controladoraReceita.cadastrarReceitaController(receitaVO);
@@ -90,7 +93,10 @@ public class MenuReceita {
 		System.out.println("\nInforme o valor da receita: ");
 		receitaVO.setValor(Double.parseDouble(teclado.nextLine()));
 		System.out.println("\nInforme a data da receita: ");
-		receitaVO.setDataReceita(LocalDate.parse(teclado.nextLine(), dataFormatter));
+		String dataReceita = teclado.nextLine();
+		if (!dataReceita.equalsIgnoreCase("")) {
+			receitaVO.setDataReceita(LocalDate.parse(dataReceita, dataFormatter));
+		}
 		
 		ControladoraReceita controladoraReceita = new ControladoraReceita();
 		controladoraReceita.atualizarReceitaController(receitaVO);
@@ -120,9 +126,11 @@ public class MenuReceita {
 				System.out.print("\nDigite o codigo da receita: ");
 				receitaVO.setId(Integer.parseInt(teclado.nextLine()));
 				ReceitaVO receita = controladoraReceita.consultarReceitaController(receitaVO);
-				System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
-				System.out.printf("\n%3s %-30s %-10s %-15s\n", "ID", "DESCRIÇÃO", "VALOR", "DATA RECEITA");
-				receita.imprimir();
+				if(receita != null) {
+					System.out.print("\n---------- RESULTADO DA CONSULTA ----------");
+					System.out.printf("\n%3s %-30s %-10s %-15s\n", "ID", "DESCRIÇÃO", "VALOR", "DATA RECEITA");
+					receita.imprimir();
+				}
 				break;
 			}
 			default:
